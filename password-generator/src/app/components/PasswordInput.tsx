@@ -9,6 +9,7 @@ import RandExp from "randexp";
 import StrengthBar from "./StrengthBar";
 import { StrengthType } from "../_types/StrengthTypes";
 import { PasswordStrengthCalculator } from "../_utils/strengthCalculators";
+import useClipboard from "../hooks/useClipboard";
 
 interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
@@ -29,8 +30,6 @@ const InputWithIcons = styled.div`
     cursor: pointer;
     background-color: var(--bg-light-color);
     padding: 0px 5px;
-
-    
   }
 `;
 const Input = styled.input`
@@ -47,10 +46,11 @@ const InputLabel = styled.p`
 `;
 
 const PasswordInput = (props: PasswordInputProps) => {
+  const sendToClipboard = useClipboard();
   const [password, setPassword] = useState("");
   const [strength, setStrength] = useState(StrengthType.LOW);
   const { lowerCase, upperCase, symbols, numbers, length } = useFilter();
-  
+
   useEffect(() => {
     generatePassword();
     checkPasswordStrength();
@@ -71,23 +71,23 @@ const PasswordInput = (props: PasswordInputProps) => {
   };
   const checkPasswordStrength = () => {
     setStrength(StrengthType.LOW);
-  }
-
+  };
+  
   return (
     <>
-    <InputContainer>
-      <InputLabel>Construct a robust password and stay secure!</InputLabel>
-      <InputWithIcons>
-        <Input {...props} value={password} readOnly />
-        <button>
-          <CopyIcon />
-        </button>
-        <button onClick={generatePassword}>
-          <RefreshIcon />
-        </button>
-      </InputWithIcons>
-    </InputContainer>
-    <StrengthBar strength={strength}/>
+      <InputContainer>
+        <InputLabel>Construct a robust password and stay secure!</InputLabel>
+        <InputWithIcons>
+          <Input {...props} value={password} readOnly />
+          <button onClick={() => sendToClipboard(password)}>
+            <CopyIcon />
+          </button>
+          <button onClick={generatePassword}>
+            <RefreshIcon />
+          </button>
+        </InputWithIcons>
+      </InputContainer>
+      <StrengthBar strength={strength} />
     </>
   );
 };
