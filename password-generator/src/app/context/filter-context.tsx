@@ -9,10 +9,12 @@ export const FilterContext = createContext({
   upperCase: true,
   symbols: true,
   numbers: true,
+  length: 32,
   setLowerCase: (value: boolean) => {},
   setUpperCase: (value: boolean) => {},
   setSymbols: (value: boolean) => {},
   setNumbers: (value: boolean) => {},
+  setLength: (value: number) => {},
 });
 
 export const FilterContextProvider = ({ children }: ProviderProps) => {
@@ -20,6 +22,7 @@ export const FilterContextProvider = ({ children }: ProviderProps) => {
   const [upperCase, setUpperCase] = useState(true);
   const [symbols, setSymbols] = useState(true);
   const [numbers, setNumbers] = useState(true);
+  const [length, setLength] = useState(32);
 
   return (
     <FilterContext.Provider
@@ -28,10 +31,12 @@ export const FilterContextProvider = ({ children }: ProviderProps) => {
         upperCase,
         symbols,
         numbers,
+        length,
         setLowerCase,
         setUpperCase,
         setSymbols,
         setNumbers,
+        setLength
       }}
     >
       {children}

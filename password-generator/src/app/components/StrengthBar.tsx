@@ -14,10 +14,12 @@ const StrengthBarContainer = styled.div<StrengthBarProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 3rem;
+  width: 50%;
+  height: 2.5rem;
+  margin: 5px 0px;
   font-size: 1.3rem;
   color: var(--primary-dark-text-color);
+  border-radius: 50px;
   background-color: ${(props) =>
     props.strength === StrengthType.HIGH
     ? "var(--high-strength-color)"

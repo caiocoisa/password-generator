@@ -10,7 +10,7 @@ export const ShieldOffIcon = () => {
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="lucide lucide-shield-off"
+      className="lucide lucide-shield-off"
     >
       <path d="M19.7 14a6.9 6.9 0 0 0 .3-2V5l-8-3-3.2 1.2" />
       <path d="m2 2 20 20" />

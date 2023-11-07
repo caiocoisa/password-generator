@@ -1,21 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes, useEffect, useState } from "react";
 import styled from "styled-components";
 import { RefreshIcon } from "../assets/icons/RefreshIcon";
 import { CopyIcon } from "../assets/icons/CopyIcon";
+import useFilter from "../hooks/useFilter";
+import RandExp from "randexp";
+import StrengthBar from "./StrengthBar";
+import { StrengthType } from "../_types/StrengthTypes";
 
-interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
-
-}
+interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 const InputContainer = styled.div`
-  display: flex;
-  align-items: start;
-  justify-content: center;
   flex-direction: column;
   border-bottom: 1px solid var(--bg-dark-color);
   width: 100%;
-  `;
+`;
 const InputWithIcons = styled.div`
   display: flex;
   align-items: start;
@@ -29,9 +29,7 @@ const InputWithIcons = styled.div`
     background-color: var(--bg-light-color);
     padding: 0px 5px;
 
-    > svg:hover {
-      transform: scale(1.2);
-    }
+    
   }
 `;
 const Input = styled.input`
@@ -42,24 +40,51 @@ const Input = styled.input`
   height: 37px;
 `;
 const InputLabel = styled.p`
-  color: var(--primary-text-color);
+  color: var(--secondary-text-color);
   font-size: 1.5rem;
+  margin-bottom: 1.5rem;
 `;
 
 const PasswordInput = (props: PasswordInputProps) => {
+  const [password, setPassword] = useState("A");
+  const [strength, setStrength] = useState(StrengthType.LOW);
+  const { lowerCase, upperCase, symbols, numbers, length } = useFilter();
+  
+  useEffect(() => {
+    generatePassword();
+    checkPasswordStrength();
+  }, [lowerCase, upperCase, symbols, numbers, length]);
+
+  const generatePassword = () => {
+    let rule = "";
+    rule = rule.concat(lowerCase ? "a-z" : "");
+    rule = rule.concat(upperCase ? "A-Z" : "");
+    rule = rule.concat(symbols ? "!@#$%&" : "");
+    rule = rule.concat(numbers ? "0-9" : "");
+    const randexp = new RandExp(`[${rule}]{${length},${length}}`);
+    console.log(rule);
+    setPassword(randexp.gen());
+  };
+  const checkPasswordStrength = () => {
+    setStrength(StrengthType.LOW);
+  }
+
   return (
+    <>
     <InputContainer>
-      <InputLabel>Crie sua senha</InputLabel>
+      <InputLabel>Construct a robust password and stay secure!</InputLabel>
       <InputWithIcons>
-        <Input {...props} />
+        <Input {...props} value={password} readOnly />
         <button>
           <CopyIcon />
         </button>
-        <button>
+        <button onClick={generatePassword}>
           <RefreshIcon />
         </button>
       </InputWithIcons>
     </InputContainer>
+    <StrengthBar strength={strength}/>
+    </>
   );
 };
 

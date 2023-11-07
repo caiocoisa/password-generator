@@ -3,22 +3,17 @@ import styled from "styled-components";
 import { SquareIcon } from "../assets/icons/SquareIcon";
 import useFilter from "../hooks/useFilter";
 import { CheckedIcon } from "../assets/icons/CheckedIcon";
+import LengthControl from "./LengthControl";
 
 const FilterPanelContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  border: 1px solid var(--primary-text-color);
   border-radius: 5px;
-  margin-top: 15px;
+  margin-top: 20px;
   width: 100%;
   height: 100px;
 `;
 
 const RadioButtonBar = styled.div`
-  display: flex;
-  align-items: center;
   justify-content: space-evenly;
   flex-direction: row;
   width: 100%;
@@ -49,26 +44,25 @@ const FilterPanel = () => {
     setSymbols,
     setNumbers,
   } = useFilter();
-  const handleOnClick = () => {
-
-  }
+  const handleOnClick = () => {};
   return (
     <FilterPanelContainer>
+      <LengthControl value="12" />
       <RadioButtonBar>
         <button onClick={() => setLowerCase(!lowerCase)}>
-          {lowerCase ? <CheckedIcon /> : <SquareIcon />} 
+          {lowerCase ? <CheckedIcon /> : <SquareIcon />}
           <p>Lower Case</p>
         </button>
         <button onClick={() => setUpperCase(!upperCase)}>
-          {upperCase ? <CheckedIcon /> : <SquareIcon />} 
+          {upperCase ? <CheckedIcon /> : <SquareIcon />}
           <p>Upper Case</p>
         </button>
         <button onClick={() => setSymbols(!symbols)}>
-          {symbols ? <CheckedIcon /> : <SquareIcon />} 
+          {symbols ? <CheckedIcon /> : <SquareIcon />}
           <p>Symbols</p>
         </button>
         <button onClick={() => setNumbers(!numbers)}>
-          {numbers ? <CheckedIcon /> : <SquareIcon />} 
+          {numbers ? <CheckedIcon /> : <SquareIcon />}
           <p>Numbers {numbers}</p>
         </button>
       </RadioButtonBar>

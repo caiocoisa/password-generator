@@ -1,4 +1,4 @@
-export const SquareIcon = () => {
+export const HorizontalArrowsIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -10,9 +10,10 @@ export const SquareIcon = () => {
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      className="lucide lucide-square"
+      className="lucide lucide-chevrons-left-right"
     >
-      <rect width="18" height="18" x="3" y="3" rx="2" />
+      <path d="m9 7-5 5 5 5" />
+      <path d="m15 7 5 5-5 5" />
     </svg>
   );
 };
