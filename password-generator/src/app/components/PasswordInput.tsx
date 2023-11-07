@@ -8,6 +8,7 @@ import useFilter from "../hooks/useFilter";
 import RandExp from "randexp";
 import StrengthBar from "./StrengthBar";
 import { StrengthType } from "../_types/StrengthTypes";
+import { PasswordStrengthCalculator } from "../_utils/strengthCalculators";
 
 interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
@@ -46,7 +47,7 @@ const InputLabel = styled.p`
 `;
 
 const PasswordInput = (props: PasswordInputProps) => {
-  const [password, setPassword] = useState("A");
+  const [password, setPassword] = useState("");
   const [strength, setStrength] = useState(StrengthType.LOW);
   const { lowerCase, upperCase, symbols, numbers, length } = useFilter();
   
@@ -55,6 +56,10 @@ const PasswordInput = (props: PasswordInputProps) => {
     checkPasswordStrength();
   }, [lowerCase, upperCase, symbols, numbers, length]);
 
+  useEffect(() => {
+    setStrength(PasswordStrengthCalculator(password));
+  }, [password]);
+
   const generatePassword = () => {
     let rule = "";
     rule = rule.concat(lowerCase ? "a-z" : "");
@@ -62,7 +67,6 @@ const PasswordInput = (props: PasswordInputProps) => {
     rule = rule.concat(symbols ? "!@#$%&" : "");
     rule = rule.concat(numbers ? "0-9" : "");
     const randexp = new RandExp(`[${rule}]{${length},${length}}`);
-    console.log(rule);
     setPassword(randexp.gen());
   };
   const checkPasswordStrength = () => {
