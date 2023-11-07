@@ -10,7 +10,7 @@ interface StrengthBarProps {
   strength: StrengthType;
 }
 
-const StrengthBarContainer = styled.div<StrengthBarProps>`
+const StrengthBarContainer = styled.div<{ $strength?: StrengthType; }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,9 +21,9 @@ const StrengthBarContainer = styled.div<StrengthBarProps>`
   color: var(--primary-dark-text-color);
   border-radius: 50px;
   background-color: ${(props) =>
-    props.strength === StrengthType.HIGH
+    props.$strength === StrengthType.HIGH
     ? "var(--high-strength-color)"
-    : props.strength === StrengthType.MEDIUM
+    : props.$strength === StrengthType.MEDIUM
     ? "var(--medium-strength-color)"
     : "var(--low-strength-color)"};
   > svg {
@@ -32,7 +32,7 @@ const StrengthBarContainer = styled.div<StrengthBarProps>`
 `;
 const StrengthBar = (props: StrengthBarProps) => {
   return (
-    <StrengthBarContainer strength={props.strength}>
+    <StrengthBarContainer $strength={props.strength}>
       {props.strength === StrengthType.HIGH && <ShieldCheckIcon />}
       {props.strength === StrengthType.MEDIUM && <ShieldAlertIcon />}
       {props.strength === StrengthType.LOW && <ShieldOffIcon />}
