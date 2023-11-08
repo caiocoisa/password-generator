@@ -1,0 +1,35 @@
+:root {
+  --border-radius: 5px;
+  --bg-light-color: #F4F2EF;
+  --bg-dark-color: #41414D;
+  --primary-text-color: #213E60;
+  --secondary-text-color: #E68C3A;
+  --primary-dark-text-color: #F4F2EF;
+  --secondary-dark-text-color: #D8D1BD;
+  --high-strength-color: #819e52;
+  --medium-strength-color: #FA9E46;
+  --low-strength-color: #DE3838;
+  
+ }
+ 
+ * {
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+ }
+ 
+ html,
+ body {
+   max-width: 100vw;
+   overflow-x: hidden;
+ }
+
+ input {
+  all: unset;
+ }
+
+ div {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+ }
