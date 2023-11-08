@@ -1,5 +1,5 @@
 export enum StrengthType {
-  "HIGH" = "Strength",
+  "HIGH" = "Strong",
   "MEDIUM" = "Medium",
-  "LOW" = "Low",
+  "LOW" = "Weak",
 }
